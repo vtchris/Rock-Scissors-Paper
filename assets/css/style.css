@@ -1,0 +1,25 @@
+img{
+    float: left;
+    height:200px;width:auto;
+}
+figure{
+    
+    opacity: 0;
+    display: inline-block;
+    position: relative;
+    transition: 2s;
+}
+figure h3 {
+    background-color: aquamarine;
+    position: absolute;
+    bottom: 2px;
+    text-align: center;
+    width:100%;
+}
+.results{
+    border: solid 1px gray;
+    display: block;
+    text-align: center;
+    width:800px;
+}
+

@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Rock Scissors Paper</title>
+  <link href="assets/css/style.css" rel="stylesheet">
+</head>
+
+<body>
+
+  <div id="game">
+    <section>
+      <h1>Instructions</h1>
+      <ol>
+        <li>Press 1 to play Rock-Scissors-Paper</li>
+        <li>Press 2 to play Rock-Scissors-Paper-Lizard-Spock</li>
+      </ol>
+      
+    </section>
+
+    <figure id="figGame">
+      <img id="imgGame">
+    </figure>
+
+    <section class="results">
+      <h1 id="textResponse"></h1>
+      <figure id="figUser">
+        <img id="imgUser">
+        <h3 id="your-header"></h3>
+      </figure>
+      <figure id="figComputer">
+        <img id="imgComputer">
+        <h3>Computer Selection</h3>
+      </figure>
+
+    </section>
+    
+
+  </div>
+
+  <script type="text/javascript">
+
+    // Creates an array that lists out all of the options (Rock, Paper, or Scissors).
+    var arrOptions = ["r", "p", "s"];
+    var sText = document.getElementById("textResponse");
+    var imgGame = document.getElementById("imgGame");
+    var imgUser = document.getElementById("imgUser");
+    var imgComputer = document.getElementById("imgComputer");
+    var figUser = document.getElementById("figUser");
+    var figComputer = document.getElementById("figComputer");
+    var figGame = document.getElementById("figGame");
+    var sYourHeader = document.getElementById("your-header");
+
+    figGame.style.opacity = "1";
+
+    // This function is run whenever the user presses a key.
+    document.onkeyup = function (event) {
+
+      // Determines which key was pressed.
+      var userSelection = event.key;
+
+      if (userSelection == 1) {
+        sText.innerHTML = "Great, now choose your weapon! <br><br> PRESS <strong>R</strong>  for Rock <br> PRESS <strong>S</strong> for Scissors <br> PRESS <strong>P</strong> for Paper!"
+
+        imgGame.src = "assets/images/9-RPS-example.png"
+
+        continueGame()
+      }
+      else if (userSelection == 2) {
+        sText.innerHTML = "Great, now choose your weapon! <br><br> PRESS <strong>R</strong> for Rock <br> PRESS <strong>S</strong> for Scissors <br> PRESS <strong>P</strong> for Paper<br>PRESS <strong>L</strong> for Lizard<br>PRESS <strong>V</strong> for Spock!"
+
+        arrOptions.push("l");
+        arrOptions.push("v");
+
+        imgGame.src = "assets/images/RSPLS.png"
+
+        continueGame()
+      }
+
+      function continueGame() {
+
+
+
+        // Randomly chooses a choice from the options array. This is the Computer's guess.
+        var computerSelection = arrOptions[Math.floor(Math.random() * arrOptions.length)];
+
+
+
+
+
+        document.onkeyup = function (event) {
+          userSelection = event.key;
+          userSelection = userSelection.toLowerCase();
+
+          if (arrOptions.indexOf(userSelection) > -1) {
+            checkWinner(userSelection, computerSelection)
+          }
+        }
+
+      }
+
+      function checkWinner(userSelection, computerSelection) {
+        //console.log("user = " + userSelection);
+        //console.log("computer = " + computerSelection);
+
+        switch (computerSelection) {
+          case "l":
+            imgComputer.src = "assets/images/geico.jpg";
+            break;
+          case "p":
+            imgComputer.src = "assets/images/paper.jpg";
+            break;
+          case "r":
+            imgComputer.src = "assets/images/rock.jfif";
+            break;
+          case "s":
+            imgComputer.src = "assets/images/scissors.jpg";
+            break;
+          case "v":
+            imgComputer.src = "assets/images/spock.jfif";
+            break;
+        }
+
+        switch (userSelection) {
+          case "l":
+            imgUser.src = "assets/images/geico.jpg";
+            break;
+          case "p":
+            imgUser.src = "assets/images/paper.jpg";
+            break;
+          case "r":
+            imgUser.src = "assets/images/rock.jfif";
+            break;
+          case "s":
+            imgUser.src = "assets/images/scissors.jpg";
+            break;
+          case "v":
+            imgUser.src = "assets/images/spock.jfif";
+            break;
+        }
+
+        if (userSelection == computerSelection) {
+          sText.innerHTML = "It's a draw!"
+          sYourHeader.innerText = "IT'S A DRAW"
+        }
+        //COMPUTER SELECTS ROCK
+        else if (computerSelection == "r") {
+          if (userSelection == "s") {
+            sText.innerHTML = "Rock crushes Scissors: You LOSE!"
+            sYourHeader.innerText = "YOU LOSE!"
+          }
+          else if (userSelection == "p") {
+            sText.innerHTML = "Paper covers Rock: You WIN!"
+            sYourHeader.innerText = "YOU WIN!"
+          }
+          else if (userSelection == "l") {
+            sText.innerHTML = "Rock crushes Lizard: You LOSE!"
+            sYourHeader.innerText = "YOU LOSE!"
+          }
+          else if (userSelection == "v") {
+            sText.innerHTML = "Spock vaporizes Rock: You WIN!"
+            sYourHeader.innerText = "YOU WIN!"
+          }
+        }
+        //COMPUTER SELECTS SCISSORS
+        else if (computerSelection == "s") {
+          if (userSelection == "r") {
+            sText.innerHTML = "Rock crushes Scissors: You WIN!"
+            sYourHeader.innerText = "YOU WIN!"
+          }
+          else if (userSelection == "p") {
+            sText.innerHTML = "Scissors cut Paper: You LOSE!"
+            sYourHeader.innerText = "YOU LOSE!"
+          }
+          else if (userSelection == "l") {
+            sText.innerHTML = "Scissors decapitate Lizard: You LOSE!"
+            sYourHeader.innerText = "YOU LOSE!"
+          }
+          else if (userSelection == "v") {
+            sText.innerHTML = "Spock smashes Scissors: You WIN!"
+            sYourHeader.innerText = "YOU WIN!"
+          }
+        }
+        //COMPUTER SELECTS PAPER
+        else if (computerSelection == "p") {
+          if (userSelection == "r") {
+            sText.innerHTML = "Paper covers Rock: You LOSE!"
+            sYourHeader.innerText = "YOU LOSE!"
+          }
+          else if (userSelection == "s") {
+            sText.innerHTML = "Scissors cut Paper: You WIN!"
+            sYourHeader.innerText = "YOU WIN!"
+          }
+          else if (userSelection == "l") {
+            sText.innerHTML = "Lizard eats paper: You WIN!"
+            sYourHeader.innerText = "YOU WIN!"
+          }
+          else if (userSelection == "v") {
+            sText.innerHTML = "Paper disproves Spock: You LOSE!"
+            sYourHeader.innerText = "YOU LOSE!"
+          }
+        }
+        //COMPUTER SELECTS LIZARD
+        else if (computerSelection == "l") {
+          if (userSelection == "r") {
+            sText.innerHTML = "Rock crushes Lizard: You WIN!"
+            sYourHeader.innerText = "YOU WIN!"
+          }
+          else if (userSelection == "s") {
+            sText.innerHTML = "Scissors decapitates Lizard: You WIN!"
+            sYourHeader.innerText = "YOU WIN!"
+          }
+          else if (userSelection == "p") {
+            sText.innerHTML = "Lizard eats paper: You LOSE!"
+            sYourHeader.innerText = "YOU LOSE!"
+          }
+          else if (userSelection == "v") {
+            sText.innerHTML = "Lizard poisons Spock: You LOSE!"
+            sYourHeader.innerText = "YOU LOSE!"
+          }
+        }
+        //COMPUTER SELECTS SPOCK
+        else if (computerSelection == "v") {
+
+          if (userSelection == "r") {
+            sText.innerHTML = "Spock vaporizes rock: You LOSE!"
+            sYourHeader.innerText = "YOU LOSE!"
+          }
+          else if (userSelection == "s") {
+            sText.innerHTML = "Spock smashes Scissors: You LOSE!"
+            sYourHeader.innerText = "YOU LOSE!"
+          }
+          else if (userSelection == "p") {
+            sText.innerHTML = "Paper disproves Spock: You WIN!"
+            sYourHeader.innerText = "YOU WIN!"
+          }
+          else if (userSelection == "l") {
+            sText.innerHTML = "Lizard poisons Spock: You WIN!"
+            sYourHeader.innerText = "YOU WIN!"
+          }
+        }
+
+        console.log(sYourHeader.innerText)
+        switch (sYourHeader.innerText) {
+          default:
+            sYourHeader.style.backgroundColor = "red";
+            break;
+          case "YOU WIN!":
+            sYourHeader.style.backgroundColor = "aquamarine";
+            break;
+            case "IT'S A DRAW":
+            sYourHeader.style.backgroundColor = "aquamarine";
+            break;
+        }
+
+        figComputer.style.opacity = "1";
+      figUser.style.opacity = "1";
+
+      }
+
+      
+
+    };
+  </script>
+
+</body>
+
+</html>
